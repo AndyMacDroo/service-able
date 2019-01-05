@@ -1,6 +1,6 @@
 # service-able
 
-A very simple health check framework for applications written in python.
+A very simple health check framework for applications, written in python.
 
 ### Defining Services
 
