@@ -1,0 +1,68 @@
+---
+
+service_health:
+
+  image_service:
+    check_me:
+      every:
+        seconds: 1
+    available_at:
+      url: http://localhost:8080/auth
+      basic_auth:
+        username: username
+        password: password
+    expect:
+      a_http_response:
+        code: 200
+
+  book_service:
+    check_me:
+      every:
+        seconds: 10
+    available_at:
+      url: https://www.google.co.uk
+    expect:
+      a_http_response:
+        code: 200
+
+  admin_service:
+    check_me:
+      every:
+        minutes: 1
+    available_at:
+      url: http://localhost:8080/admin
+      basic_auth:
+        username: username
+        password: password
+    expect:
+      a_http_response:
+        code: 200
+        json: '{ "STATUS" : "UP" }'
+
+  user_service:
+    check_me:
+      at:
+        time: '15:20'
+    available_at:
+      url: http://localhost:8080/users
+      basic_auth:
+        username: username
+        password: password
+    expect:
+      a_http_response:
+        code: 200
+        json: '{ "STATUS" : "UP" }'
+
+  auth_service:
+    check_me:
+      at:
+        time: '21:30'
+    log:
+      with_directory: /opt/services/auth/logs/auth.log
+    expect:
+      log:
+        exists: True
+        date_format: '%d/%b/%Y:%H:%M:%S'
+        latest_lines:
+          last: 10
+          not_matching: '(.*?)Exception(.*?)'
