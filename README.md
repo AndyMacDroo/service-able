@@ -85,7 +85,19 @@ Get usage notes:
 python main.py -h
 ```
 
-## Daemon
+## Modes
+
+Modes can be specified with a `-m` argument - for full details check the usage notes:
+
+```
+python main.py -h
+```
+
+### One-shot
+
+Run all tests just once and ignore any `check_me` config.
+
+### Daemon (default)
 
 The health check daemon will log out when services become unhealthy based on their config in the following format:
 

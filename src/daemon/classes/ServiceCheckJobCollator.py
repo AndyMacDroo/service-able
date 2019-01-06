@@ -10,9 +10,9 @@ class ServiceCheckJobCollator:
     service = None
     expectation_job = None
 
-    def __init__(self, service):
+    def __init__(self, service, mode):
+        self.mode = mode
         self.service = service
-        self.service_logger = sl.ServiceLogger()
         self.expectation_job = ej.ExpectationJob(
             self.service.service_name,
             self.service.expect, self.service.available_at)
@@ -20,9 +20,11 @@ class ServiceCheckJobCollator:
     def execute_job(self):
         self.service.set_is_healthy(self.expectation_job.run_and_return_results())
         self.log_service_status()
+        if self.mode is not "daemon":
+            return self.service.is_healthy
 
     def log_service_status(self):
-        self.service_logger.log_at_info("{} - [service-able/{}] - the service is {}."
+        sl.ServiceLogger().log_at_info("{} - [service-able/{}] - the service is {}."
                                         .format(str(datetime.datetime.now()),
                       self.service.service_name,
                       "HEALTHY" if self.service.is_healthy else "UNHEALTHY - expected:" + str(self.service.expect)))
@@ -55,5 +57,5 @@ class ServiceCheckJobCollator:
         elif every_schedule.get('hour') is not None:
             return schedule.every(every_schedule.get('hour')).hours
 
-    def initialise_service_checks(self):
+    def initialise_service_checks_schedule(self):
         self.configure_schedule_for_job().do(self.execute_job)
