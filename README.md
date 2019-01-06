@@ -34,6 +34,28 @@ service_health:
 
 ```
 
+#### Basic Auth
+
+Basic auth can also be supported with the following configuration:
+
+```yaml
+  mock_service:
+    check_me:
+      every:
+        seconds: 10
+    available_at:
+      url: https://jsonplaceholder.typicode.com/todos/1
+      basic_auth:
+        username: username
+        password: password
+    expect:
+      a_http_response:
+        code: 200
+        json: '{ "userId": 1, "id" : 1, "title": "delectus aut autem", "completed": false }'
+
+```
+
+
 ## Installation and Usage
 
 Install python dependencies:
