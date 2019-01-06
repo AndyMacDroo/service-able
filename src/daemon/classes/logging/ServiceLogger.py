@@ -9,7 +9,6 @@ class ServiceLogger:
         pass
 
     def log_at_info(self, message):
-        print "Invoked"
         logging.info(str(message))
 
     def log_at_debug(self, message):

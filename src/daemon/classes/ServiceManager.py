@@ -30,5 +30,5 @@ class ServiceManager:
         else:
             if unhealthy_services:
                 # Failure occurred, exit.
-                sl.ServiceLogger().log_at_info(unhealthy_services)
+                sl.ServiceLogger().log_at_info("Unhealthy services found: {}".format(unhealthy_services))
                 sys.exit(1)
