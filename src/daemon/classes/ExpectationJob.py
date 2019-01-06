@@ -28,14 +28,18 @@ class ExpectationJob:
         return False
 
     def http_response_is_good(self, response):
-        if self.expect.get('a_http_response').get('code') is None:
+        a_http_response_config = self.expect.get('a_http_response')
+        if a_http_response_config.get('code') is None:
             status_code_is_good = response.status_code == 200
         else:
-            status_code_is_good = response.status_code == self.expect.get('a_http_response').get('code')
+            status_code_is_good = response.status_code == a_http_response_config.get('code')
         if self.expect.get('a_http_response').get('json') is not None:
-            response_content_is_good = self.compare_json_response_with_expected(response.content, self.expect.get('a_http_response').get('json'))
+            response_content_is_good = self.compare_json_response_with_expected(response.content, a_http_response_config.get('json'))
         else:
-            response_content_is_good = True
+            if a_http_response_config.get('contains') is not None:
+                response_content_is_good = self.expect.get('a_http_response').get('contains') in response.content
+            else:
+                response_content_is_good = True
         return status_code_is_good and response_content_is_good
 
     def do_http_request(self, available_at):

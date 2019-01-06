@@ -31,6 +31,18 @@ service_health:
       a_http_response:
         code: 200
         json: '{ "userId": 1, "id" : 1, "title": "delectus aut autem", "completed": false }'
+        
+  microsoft:
+    check_me:
+      every:
+        seconds: 10
+    available_at:
+      url: https://www.microsoft.com
+    expect:
+      a_http_response:
+        code: 200
+        contains: 'microsoft'
+        
 
 ```
 

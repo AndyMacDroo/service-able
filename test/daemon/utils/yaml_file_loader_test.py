@@ -9,7 +9,7 @@ class YamlFileLoaderTest(unittest.TestCase):
         pass
 
     def test_map_service_dict_to_service_list_with_service_dict_returns_service_list(self):
-        service_dict = { 'myService': { 'log': {}, 'expect': {}, 'available_at': {}, 'check_me': { }  } }
+        service_dict = { 'myService': { 'log': {}, 'expect': {}, 'available_at': {}, 'check_me': {}} }
         expected = sm.ServiceableService('myService').set_available_at({}).set_check_me({}).set_expect({}).set_log({})
         actual = map_service_dict_to_service_list(service_dict)[0]
         self.assertEqual(expected, actual)
