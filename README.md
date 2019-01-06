@@ -95,7 +95,7 @@ python main.py -h
 
 ### One-shot
 
-Run all tests just once and ignore any `check_me` config.
+Run all tests just once and ignore any `check_me` config. If any unhealthy services are found, an exit code of `1` will be returned and the unhealthy services will be logged out.
 
 ### Daemon (default)
 
