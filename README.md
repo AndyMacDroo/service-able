@@ -1,4 +1,4 @@
-# service-able
+# service-able [![Build Status](https://travis-ci.org/AndyMacDroo/service-able.svg?branch=master)](https://travis-ci.org/AndyMacDroo/service-able)
 
 A very simple health check framework for applications, written in python.
 
