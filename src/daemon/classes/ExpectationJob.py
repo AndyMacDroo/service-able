@@ -32,5 +32,6 @@ class ExpectationJob:
         if basic_auth_configuration is not None:
             return requests.get(self.available_at.get('url'),
                                 auth=(basic_auth_configuration.get('username'),
-                                      basic_auth_configuration.get('password')))
-        return requests.get(self.available_at.get('url'))
+                                      basic_auth_configuration.get('password')),
+                                timeout=10)
+        return requests.get(self.available_at.get('url'), timeout=10)

@@ -31,5 +31,12 @@ class ServiceableService:
         self.log = log
         return self
 
+    def __eq__(self, other):
+        return self.service_name == other.service_name \
+               and self.log == other.log \
+               and self.check_me == other.check_me \
+               and self.expect == other.expect \
+               and self.available_at == other.available_at
+
     def __repr__(self):
         return "%s" % (self.service_name)
