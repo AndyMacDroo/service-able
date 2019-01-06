@@ -2,6 +2,8 @@ import schedule
 import ExpectationJob as ej
 import datetime
 
+from src.daemon.classes.logging import ServiceLogger as sl
+
 
 class ServiceCheckJobCollator:
 
@@ -10,6 +12,7 @@ class ServiceCheckJobCollator:
 
     def __init__(self, service):
         self.service = service
+        self.service_logger = sl.ServiceLogger()
         self.expectation_job = ej.ExpectationJob(
             self.service.service_name,
             self.service.expect, self.service.available_at)
@@ -19,8 +22,8 @@ class ServiceCheckJobCollator:
         self.log_service_status()
 
     def log_service_status(self):
-        print("{} - [service-able/{}] - the service is {}."
-              .format(str(datetime.datetime.now()),
+        self.service_logger.log_at_info("{} - [service-able/{}] - the service is {}."
+                                        .format(str(datetime.datetime.now()),
                       self.service.service_name,
                       "HEALTHY" if self.service.is_healthy else "UNHEALTHY - expected:" + str(self.service.expect)))
 

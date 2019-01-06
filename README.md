@@ -20,6 +20,17 @@ service_health:
     expect:
       a_http_response:
         code: 200
+        
+  mock_service:
+    check_me:
+      every:
+        seconds: 10
+    available_at:
+      url: https://jsonplaceholder.typicode.com/todos/1
+    expect:
+      a_http_response:
+        code: 200
+        json: '{ "userId": 1, "id" : 1, "title": "delectus aut autem", "completed": false }'
 
 ```
 
