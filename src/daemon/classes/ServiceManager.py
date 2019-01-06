@@ -1,5 +1,6 @@
 import ServiceCheckJobCollator as scd
 import schedule
+import sys
 
 from src.daemon.classes.logging import ServiceLogger as sl
 
@@ -27,4 +28,7 @@ class ServiceManager:
             while True:
                 schedule.run_pending()
         else:
-            sl.ServiceLogger().log_at_info(unhealthy_services)
+            if unhealthy_services:
+                # Failure occurred, exit.
+                sl.ServiceLogger().log_at_info(unhealthy_services)
+                sys.exit(1)
