@@ -75,6 +75,11 @@ Install python dependencies:
 pip install -r requirements.txt
 ```
 
+Running unit tests:
+```
+python -m unittest discover -p "*Test*.py"
+```
+
 Get usage notes:
 ```
 python main.py -h

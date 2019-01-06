@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 import unittest
 from src.daemon.utils.yaml_file_loader import *
 from src.daemon.classes import ServiceableService as sm
